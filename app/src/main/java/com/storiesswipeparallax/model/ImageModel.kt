@@ -1,4 +1,4 @@
-package com.storiesswipeparallax
+package com.storiesswipeparallax.model
 
 class ImageModel {
 

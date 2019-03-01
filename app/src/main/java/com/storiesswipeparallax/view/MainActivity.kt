@@ -1,11 +1,15 @@
-package com.storiesswipeparallax
+package com.storiesswipeparallax.view
 
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.util.Log
+import com.storiesswipeparallax.R
+import com.storiesswipeparallax.adapter.SlidingImageAdapter
+import com.storiesswipeparallax.adapter.ViewPagerAdapter
 import com.storiesswipeparallax.databinding.ActivityMainBinding
+import com.storiesswipeparallax.model.ImageModel
 import com.storiesswipeparallax.widget.ViewPageScroller
 import com.storiesswipeparallax.widget.setViewPageScroller
 import jp.shts.android.storiesprogressview.StoriesProgressView
@@ -14,16 +18,18 @@ import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
 
-    private val LOG_DEBUG = "PARALAX"
+    private val LOG_DEBUG = "LOG_SWIPEPARALAX"
 
     private var imageModelArrayList: ArrayList<ImageModel>? = null
 
-    private val myImageList = intArrayOf(R.drawable.sample1,
-                                            R.drawable.sample2,
-                                            R.drawable.sample3,
-                                            R.drawable.sample4,
-                                            R.drawable.sample5,
-                                            R.drawable.sample6)
+    private val myImageList = intArrayOf(
+        R.drawable.sample1,
+        R.drawable.sample2,
+        R.drawable.sample3,
+        R.drawable.sample4,
+        R.drawable.sample5,
+        R.drawable.sample6
+    )
 
     lateinit var binding: ActivityMainBinding
     lateinit var mPager: ViewPager
@@ -63,7 +69,8 @@ class MainActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
         storiesProgressView.setStoriesListener(this)
 
         mPager = binding.vp
-        mPager.adapter = SlidingImageAdapter(this@MainActivity, this.imageModelArrayList!!)
+        mPager.adapter =
+            SlidingImageAdapter(this@MainActivity, this.imageModelArrayList!!)
 
 
         mPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -82,7 +89,6 @@ class MainActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
             pagerAdapter.addFragment(ContentFragment(), null)
         }
         binding.container.adapter = pagerAdapter
-        var isHalf = false
         binding.container.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(p0: Int) {
                 currentPage = p0
@@ -99,7 +105,7 @@ class MainActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
             }
 
             override fun onPageSelected(p0: Int) {
-                binding.container.currentItem = p0
+                setImageViewPager(p0)
                 if (p0 < counter){
                     storiesProgressView.reverse()
                 } else if (p0 > counter){
@@ -110,6 +116,14 @@ class MainActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
         })
     }
 
+    private fun setContentViewPager(index: Int){
+        binding.container.currentItem = index
+    }
+
+    private fun setImageViewPager(index: Int){
+        mPager.setCurrentItem(index, true)
+    }
+
     override fun onComplete() {
 //        storiesProgressView.destroy()
     }
@@ -117,12 +131,18 @@ class MainActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
     override fun onPrev() {
         val prevIndex = --counter
         Log.d(LOG_DEBUG, "Prev Index : $prevIndex")
-        mPager.setCurrentItem(prevIndex, true)
+        setImageViewPager(prevIndex)
+        if (currentPage != prevIndex){
+            setContentViewPager(prevIndex)
+        }
     }
 
     override fun onNext() {
         val nextIndex = ++counter
         Log.d(LOG_DEBUG, "Next Index : $nextIndex")
-        mPager.setCurrentItem(nextIndex, true)
+        setImageViewPager(nextIndex)
+        if (currentPage != nextIndex){
+            setContentViewPager(nextIndex)
+        }
     }
 }

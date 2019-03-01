@@ -1,4 +1,4 @@
-package com.storiesswipeparallax
+package com.storiesswipeparallax.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.storiesswipeparallax.R
 import com.storiesswipeparallax.databinding.FragmentPageBinding
 
 class ContentFragment: Fragment() {
@@ -25,7 +26,8 @@ class ContentFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_page, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater,
+            R.layout.fragment_page, container, false)
         val data = arguments?.getString(EXTRA_DATA_CONTENT)
 
         return binding?.root

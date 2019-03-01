@@ -1,4 +1,4 @@
-package com.storiesswipeparallax
+package com.storiesswipeparallax.adapter
 
 import android.content.Context
 import android.os.Parcelable
@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.storiesswipeparallax.model.ImageModel
+import com.storiesswipeparallax.R
 import java.util.ArrayList
 
 /**
