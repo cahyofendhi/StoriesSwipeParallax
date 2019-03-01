@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:padding="20dp">
+
+        <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Add this line at the bottom of the onCreate() method to link your ViewPager reference to the xml view you created previously"/>
+    </FrameLayout>
+
+</layout>
+
