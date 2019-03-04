@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.storiesswipeparallax.R
 import com.storiesswipeparallax.databinding.FragmentPageBinding
+import kotlinx.android.synthetic.main.fragment_page.view.*
 
 class ContentFragment: Fragment() {
 
@@ -29,6 +30,10 @@ class ContentFragment: Fragment() {
         binding = DataBindingUtil.inflate(layoutInflater,
             R.layout.fragment_page, container, false)
         val data = arguments?.getString(EXTRA_DATA_CONTENT)
+        data?.let { text ->
+            binding?.title?.text = text
+        }
+
 
         return binding?.root
     }

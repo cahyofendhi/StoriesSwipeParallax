@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), StoriesProgressView.StoriesListener {
 
         pagerAdapter = ViewPagerAdapter(manager = supportFragmentManager)
         myImageList.forEach {
-            pagerAdapter.addFragment(ContentFragment(), null)
+            pagerAdapter.addFragment(ContentFragment.instance("Component : $it"), null)
         }
         binding.container.adapter = pagerAdapter
         binding.container.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
